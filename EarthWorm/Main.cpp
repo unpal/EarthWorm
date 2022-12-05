@@ -7,6 +7,8 @@ int main()
 	static DrawBord drawbord;
 	static COORD PointLocation[10];
 	static Point drawpoint;
+	static int MoveCase = 3;
+	static DrawWorm drawworm;
 	thread Thread_1 = thread([] 
 		{
 			while (true)
@@ -31,22 +33,24 @@ int main()
 		});
 	thread Thread_2 = thread([]
 		{
-			DrawWorm drawworm;
 			drawworm.CreateWorm();
-			char Input;
 			while (true)
 			{
-					Input = drawworm.GetCommand();
-					if (Input != -1)
-					{
-						if (Input == UP)
+						switch (MoveCase)
+						{
+						case 1:
 							drawworm.Move_Worm_Up();
-						if (Input == DOWN)
+							break;
+						case 2:
 							drawworm.Move_Worm_Down();
-						if (Input == LEFT)
+							break;
+						case 3:
 							drawworm.Move_Worm_Left();
-						if (Input == RIGHT)
+							break;
+						case 4:
 							drawworm.Move_Worm_Right();
+							break;
+						}
 						drawbord.CreateBord();
 						for (int i = 0; i < 9; i++)
 						{
@@ -55,7 +59,26 @@ int main()
 								drawpoint.CreatePoint(PointLocation[i].X, PointLocation[i].Y);
 							}
 						}
-					}
+						Sleep(500);
+			}
+		});
+	thread Thread_3 = thread([]
+		{
+			while (true)
+			{
+				char Input;
+				Input = drawworm.GetCommand();
+				if (Input != -1)
+				{
+					if (Input == UP)
+						MoveCase = 1;
+					if (Input == DOWN)
+						MoveCase = 2;
+					if (Input == LEFT)
+						MoveCase = 3;
+					if (Input == RIGHT)
+						MoveCase = 4;
+				}
 			}
 		});
 	Thread_1.join();

@@ -9,14 +9,6 @@ private:
 public:
 	void CreateWorm()
 	{
-		for (WormLange = 0; WormLange < 9; WormLange++)
-		{
-			if(WormLange <5)
-				GoTo_XY(40+(WormLange *2), 15);
-			if (WormLange >= 5)
-				GoTo_XY(48, 15 + (WormLange-4));
-			DrawEarthWorm();
-		}
 		WormLocation[0].X = 40;
 		WormLocation[0].Y = 15;
 		WormLocation[1].X = 47;
@@ -26,28 +18,56 @@ public:
 	{
 		Erase();
 		GoTo_XY(WormLocation[0].X - 2, WormLocation[0].Y);
-		DrawEarthWorm();
+		for (WormLange = 0; WormLange < 9; WormLange++)
+		{
+			if (WormLange < 5)
+				GoTo_XY(WormLocation[0].X - 2 + (WormLange * 2), WormLocation[0].Y);
+			if (WormLange >= 5)
+				GoTo_XY(WormLocation[0].X - 2, WormLocation[0].Y + (WormLange - 4));
+			DrawEarthWorm();
+		}
 		WormLocation[0].X = WormLocation[0].X - 2;
 	}
 	void Move_Worm_Right()
 	{
 		Erase();
 		GoTo_XY(WormLocation[0].X + 2, WormLocation[0].Y);
-		DrawEarthWorm();
+		for (WormLange = 0; WormLange < 9; WormLange++)
+		{
+			if (WormLange < 5)
+				GoTo_XY(WormLocation[0].X - 2 + (WormLange * 2), WormLocation[0].Y);
+			if (WormLange >= 5)
+				GoTo_XY(WormLocation[0].X - 2, WormLocation[0].Y + (WormLange - 4));
+			DrawEarthWorm();
+		}
 		WormLocation[0].X = WormLocation[0].X + 2;
 	}
 	void Move_Worm_Up()
 	{
 		Erase();
 		GoTo_XY(WormLocation[0].X, WormLocation[0].Y-1);
-		DrawEarthWorm();
+		for (WormLange = 0; WormLange < 9; WormLange++)
+		{
+			if (WormLange < 5)
+				GoTo_XY(WormLocation[0].X - 2 + (WormLange * 2), WormLocation[0].Y);
+			if (WormLange >= 5)
+				GoTo_XY(WormLocation[0].X - 2, WormLocation[0].Y + (WormLange - 4));
+			DrawEarthWorm();
+		}
 		WormLocation[0].Y = WormLocation[0].Y-1;
 	}
 	void Move_Worm_Down()
 	{
 		Erase();
-		GoTo_XY(WormLocation[0].X - 2, WormLocation[0].Y+1);
-		DrawEarthWorm();
+		GoTo_XY(WormLocation[0].X, WormLocation[0].Y+1);
+		for (WormLange = 0; WormLange < 9; WormLange++)
+		{
+			if (WormLange < 5)
+				GoTo_XY(WormLocation[0].X - 2 + (WormLange * 2), WormLocation[0].Y);
+			if (WormLange >= 5)
+				GoTo_XY(WormLocation[0].X - 2, WormLocation[0].Y + (WormLange - 4));
+			DrawEarthWorm();
+		}
 		WormLocation[0].Y = WormLocation[0].Y + 1;
 	}
 	int GetCommand() {
