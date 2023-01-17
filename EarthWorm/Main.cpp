@@ -83,5 +83,5 @@ int main()
 		});
 	Thread_1.join();
 	Thread_2.join();
-
+	Thread_3.join();
 }
